@@ -3,6 +3,11 @@ name: fix-code-style
 on:
   push:
 
+# Добавьте этот блок
+permissions:
+  contents: write
+  workflows: write
+
 jobs:
   fix-code-style:
     runs-on: ubuntu-latest
@@ -10,6 +15,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
+          # Важно использовать токен с новыми правами
+          token: ${{ secrets.GITHUB_TOKEN }}
           ref: ${{ github.head_ref }}
       - name: Set up Node
         uses: actions/setup-node@v2
